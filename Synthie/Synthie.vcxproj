@@ -134,6 +134,7 @@
     <ClCompile Include="CAudioNode.cpp" />
     <ClCompile Include="CInstrument.cpp" />
     <ClCompile Include="CNote.cpp" />
+    <ClCompile Include="CSequencer.cpp" />
     <ClCompile Include="CSineWave.cpp" />
     <ClCompile Include="CSynthesizer.cpp" />
     <ClCompile Include="CToneInstrument.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="CAudioNode.h" />
     <ClInclude Include="CInstrument.h" />
     <ClInclude Include="CNote.h" />
+    <ClInclude Include="CSequencer.h" />
     <ClInclude Include="CSineWave.h" />
     <ClInclude Include="CSynthesizer.h" />
     <ClInclude Include="CToneInstrument.h" />

@@ -28,8 +28,8 @@ CSynthieView::CSynthieView()
     m_audiooutput = true;
     m_fileoutput = false;
 
-	m_synthesizer.SetNumChannels(NumChannels());
-	m_synthesizer.SetSampleRate(SampleRate());
+	m_sequencer.SetNumChannels(NumChannels());
+	m_sequencer.SetSampleRate(SampleRate());
 }
 
 CSynthieView::~CSynthieView()
@@ -229,11 +229,11 @@ void CSynthieView::OnGenerateSynthesizer()
 	if (!GenerateBegin())
 		return;
 
-	m_synthesizer.Start();
+	m_sequencer.Start();
 	short audio[2];
 	double frame[2];
 
-	while (m_synthesizer.Generate(frame))
+	while (m_sequencer.Generate(frame))
 	{
 		audio[0] = RangeBound(frame[0] * 32767);
 		audio[1] = RangeBound(frame[1] * 32767);
@@ -258,5 +258,5 @@ void CSynthieView::OnFileOpenscore()
 	if (dlg.DoModal() != IDOK)
 		return;
 
-	m_synthesizer.OpenScore(dlg.GetPathName());
+	m_sequencer.OpenScore(dlg.GetPathName());
 }

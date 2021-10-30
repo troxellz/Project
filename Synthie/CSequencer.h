@@ -1,6 +1,8 @@
 #pragma once
 #include <list>
 #include "CInstrument.h"
+#include "CSynthesizer.h"
+#include "CNoiseGate.h"
 #include "msxml2.h"
 #include <vector>
 #include "CNote.h"
@@ -47,6 +49,7 @@ private:
     double	m_sampleRate;
     double	m_samplePeriod;
     double m_time;
+    std::list<CSynthesizer*> m_snthesizers;
     std::list<CInstrument*>  m_instruments;
     double  m_bpm;                  //!< Beats per minute
     int     m_beatspermeasure;  //!< Beats per measure
@@ -58,6 +61,7 @@ private:
 
     void XmlLoadScore(IXMLDOMNode* xml);
     void XmlLoadSynthesizer(IXMLDOMNode* xml);
+    CNoiseGate m_noiseGate;
 
 
 };

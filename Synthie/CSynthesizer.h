@@ -30,6 +30,10 @@ public:
     //! Start the synthesizer
     void Start(void);
 
+    void SetBPM(double bpm) { m_bpm = bpm; }
+
+    void SetBeatsPerMeasuer(double bpm) { m_beatspermeasure = bpm; }
+
 
     //! Generate one audio frame
     bool Generate(double* frame);
@@ -42,6 +46,9 @@ public:
     //! Get the time since we started generating audio
     double GetTime() { return m_time; }
 
+    void XmlLoadScore(IXMLDOMNode* xml);
+    void XmlLoadInstrument(IXMLDOMNode* xml);
+    void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument);
 private:
     int		m_channels;
     double	m_sampleRate;
@@ -56,9 +63,7 @@ private:
     int m_measure;              //!< The current measure
     double m_beat;              //!< The current beat within the measure
 
-    void XmlLoadScore(IXMLDOMNode* xml);
-    void XmlLoadInstrument(IXMLDOMNode* xml);
-    void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument);
+
 
 
 };

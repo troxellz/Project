@@ -16,9 +16,9 @@ CSynthesizer::CSynthesizer(void)
     m_samplePeriod = 1 / m_sampleRate;
     m_time = 0;
 
-    m_bpm = 0;
+    m_bpm = 120;
     m_secperbeat = 0.5;
-    m_beatspermeasure = 4;
+    m_beatspermeasure = 2;
 }
 
 void CSynthesizer::Start(void)
@@ -172,11 +172,15 @@ void CSynthesizer::Clear(void)
 void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
 {
     wstring instrument = L"";
+    CComBSTR nameTest;
+    xml->get_nodeName(&nameTest);
 
     // Get a list of all attribute nodes and the
     // length of that list
+    CComPtr<IXMLDOMNode> node;
+    xml->get_firstChild(&node);
     CComPtr<IXMLDOMNamedNodeMap> attributes;
-    xml->get_attributes(&attributes);
+    node->get_attributes(&attributes);
     long len;
     attributes->get_length(&len);
 
@@ -202,17 +206,17 @@ void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
     }
 
 
-    CComPtr<IXMLDOMNode> node;
-    xml->get_firstChild(&node);
-    for (; node != NULL; NextNode(node))
+    CComPtr<IXMLDOMNode> node2;
+    node->get_firstChild(&node2);
+    for (; node2 != NULL; NextNode(node2))
     {
         // Get the name of the node
         CComBSTR name;
-        node->get_nodeName(&name);
+        node2->get_nodeName(&name);
 
         if (name == L"note")
         {
-            XmlLoadNote(node, instrument);
+            XmlLoadNote(node2, instrument);
         }
     }
 }

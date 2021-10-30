@@ -1,8 +1,11 @@
 #include "pch.h"
 #include "CSequencer.h"
+#include "CSynthesizer.h"
 #include "xmlhelp.h"
 #include <string>
 #include <algorithm>
+
+using namespace std;
 
 CSequencer::CSequencer(void)
 {
@@ -13,17 +16,21 @@ CSequencer::CSequencer(void)
     m_samplePeriod = 1 / m_sampleRate;
     m_time = 0;
 
-    m_bpm = 0;
+    m_bpm = 120;
     m_secperbeat = 0.5;
-    m_beatspermeasure = 4;
+    m_beatspermeasure = 3;
 }
 
 void CSequencer::Start(void)
 {
-    m_currentNote = 0;
     m_measure = 0;
     m_beat = 0;
     m_time = 0;
+    for (list<CSynthesizer*>::iterator node = m_snthesizers.begin(); node != m_snthesizers.end(); )
+    {
+        (*node)->Start();
+        node++;
+    }
 }
 
 void CSequencer::OpenScore(CString& filename)
@@ -46,7 +53,7 @@ void CSequencer::OpenScore(CString& filename)
     // Open the XML document
     VARIANT_BOOL ok;
     succeeded = SUCCEEDED(pXMLDoc->load(CComVariant(filename), &ok));
-    if (!succeeded || ok == VARIANT_FALSE)
+if (!succeeded || ok == VARIANT_FALSE)
     {
         AfxMessageBox(L"Failed to open XML score file");
         return;
@@ -71,7 +78,7 @@ void CSequencer::OpenScore(CString& filename)
         }
     }
 
-    sort(m_notes.begin(), m_notes.end());
+//    sort(m_notes.begin(), m_notes.end());
 
 }
 
@@ -135,18 +142,29 @@ void CSequencer::XmlLoadScore(IXMLDOMNode* xml)
 
 void CSequencer::XmlLoadSynthesizer(IXMLDOMNode* xml)
 {
-
+    CSynthesizer* synthesizer = NULL;
+    synthesizer = new CSynthesizer();
+    synthesizer->SetNumChannels(m_channels);
+    synthesizer->SetSampleRate(m_sampleRate);
+    synthesizer->SetBPM(m_bpm);
+    synthesizer->XmlLoadInstrument(xml);
+    m_snthesizers.push_back(synthesizer);
 }
 
 
 void CSequencer::Clear(void)
 {
-    m_instruments.clear();
-    m_notes.clear();
-
+    m_snthesizers.clear();
+    
 }
 
 bool CSequencer::Generate(double* frame)
 {
+    for (list<CSynthesizer*>::iterator node = m_snthesizers.begin(); node != m_snthesizers.end(); )
+    {
+        (*node)->Generate(frame);
+        node++;
+    }
+    m_noiseGate.Process(frame, frame);
     return true;
 }

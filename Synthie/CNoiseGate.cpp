@@ -3,9 +3,9 @@
 
 CNoiseGate::CNoiseGate()
 {
-	m_dry = 0;
-	m_wet = 1;
-	m_threshold = .005;
+	m_dry = 1;
+	m_wet = 0;
+	m_threshold = .0015;
 }
 
 void CNoiseGate::Process(double *frameIn, double *frameOut)
@@ -13,6 +13,7 @@ void CNoiseGate::Process(double *frameIn, double *frameOut)
 	for (int c = 0; c < 2; c++)
 	{
 		double calcValue = 0;
+
 		if (abs(frameIn[c]) > m_threshold)
 		{
 			calcValue = frameIn[c];

@@ -3,6 +3,8 @@
 #include "CInstrument.h"
 #include "CSynthesizer.h"
 #include "CNoiseGate.h"
+#include "CChorusEffect.h"
+#include "CCompressor.h"
 #include "msxml2.h"
 #include <vector>
 #include "CNote.h"
@@ -63,6 +65,9 @@ private:
     void XmlLoadSynthesizer(IXMLDOMNode* xml);
     CNoiseGate m_noiseGate;
 
+    CChorusEffect m_chorus;
+
+    CCompressor m_compressor;
 
 };
 

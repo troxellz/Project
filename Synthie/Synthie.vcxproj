@@ -133,6 +133,7 @@
     <ClCompile Include="CAR.cpp" />
     <ClCompile Include="CAudioNode.cpp" />
     <ClCompile Include="CChorusEffect.cpp" />
+    <ClCompile Include="CCompressor.cpp" />
     <ClCompile Include="CInstrument.cpp" />
     <ClCompile Include="CNoiseGate.cpp" />
     <ClCompile Include="CNote.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="CAR.h" />
     <ClInclude Include="CAudioNode.h" />
     <ClInclude Include="CChorusEffect.h" />
+    <ClInclude Include="CCompressor.h" />
     <ClInclude Include="CInstrument.h" />
     <ClInclude Include="CNoiseGate.h" />
     <ClInclude Include="CNote.h" />

@@ -93,7 +93,6 @@ void CSynthieView::OnGenerate1000hztone()
 		audio[1] = audio[0];
 
 		GenerateWriteFrame(audio);
-
 		// The progress control
 		if(ProgressAbortCheck())
 			break;

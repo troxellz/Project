@@ -165,6 +165,13 @@ bool CSequencer::Generate(double* frame)
         (*node)->Generate(frame);
         node++;
     }
+    double audio[2];
+    m_chorus.Process(frame, audio);
+    frame[0] = audio[0];
+    frame[1] = audio[1];
+    m_compressor.Process(frame, audio);
+    frame[0] = audio[0];
+    frame[1] = audio[1];
     m_noiseGate.Process(frame, frame);
     return true;
 }

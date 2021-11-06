@@ -8,7 +8,7 @@ CChorusEffect::CChorusEffect()
 	m_dry = .5;
 	m_wet = .5;
 	m_delay = 2206;
-	m_wrloc = m_delay;
+	m_wrloc = 0;
 	m_rdloc = 0;
 	m_wave.SetAmplitude(1);
 	m_wave.SetFreq(3);
@@ -27,9 +27,14 @@ void CChorusEffect::Process(double* frameIn, double* frameOut)
 		int sampledTimes = 0;
 		for (int x = 0; x < 5; x++)
 		{
-			if (m_samples[(m_rdloc + x * m_delay + c) % QSIZE] < frameIn[c] + 100 && m_samples[(m_rdloc + x * m_delay + c)%QSIZE] > frameIn[c] - 100)
+			int test = (m_rdloc - x * m_delay + c) % QSIZE;
+			if (test < 0)
 			{
-				calcValue += m_samples[(m_rdloc + x * m_delay + c) % QSIZE] + m_wave.Generate() * .001;
+				test += QSIZE;
+			}
+			if (m_samples[test] < frameIn[c] + 100 && m_samples[test] > frameIn[c] - 100)
+			{
+				calcValue += m_samples[test] + m_wave.Generate() * .001;
 				sampledTimes++;
 			}
 		}

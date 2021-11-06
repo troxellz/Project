@@ -2,11 +2,11 @@
 #include <vector>
 #include "CSineWave.h"
 
-class CChorusEffect
+class CReverberation
 {
 public:
 	//! Constructor
-	CChorusEffect();
+	CReverberation();
 
 	//!Proccesses the incoming sound
 	void Process(double* frameIn, double* frameOut);
@@ -32,6 +32,5 @@ private:
 	//!how many samples we are delaying by.
 	int m_delay;
 
-	//! The sinewave which produces variation within the sound
-	CSineWave m_wave;
 };
+

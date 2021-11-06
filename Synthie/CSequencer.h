@@ -5,6 +5,7 @@
 #include "CNoiseGate.h"
 #include "CChorusEffect.h"
 #include "CCompressor.h"
+#include "CReverberation.h"
 #include "msxml2.h"
 #include <vector>
 #include "CNote.h"
@@ -69,5 +70,6 @@ private:
 
     CCompressor m_compressor;
 
+    CReverberation m_reverb;
 };
 

@@ -172,6 +172,9 @@ bool CSequencer::Generate(double* frame)
     m_compressor.Process(frame, audio);
     frame[0] = audio[0];
     frame[1] = audio[1];
+    m_reverb.Process(frame, audio);
+    frame[0] = audio[0];
+    frame[1] = audio[1];
     m_noiseGate.Process(frame, frame);
     return true;
 }

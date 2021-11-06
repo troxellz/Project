@@ -137,6 +137,7 @@
     <ClCompile Include="CInstrument.cpp" />
     <ClCompile Include="CNoiseGate.cpp" />
     <ClCompile Include="CNote.cpp" />
+    <ClCompile Include="CReverberation.cpp" />
     <ClCompile Include="CSequencer.cpp" />
     <ClCompile Include="CSineWave.cpp" />
     <ClCompile Include="CSynthesizer.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="CInstrument.h" />
     <ClInclude Include="CNoiseGate.h" />
     <ClInclude Include="CNote.h" />
+    <ClInclude Include="CReverberation.h" />
     <ClInclude Include="CSequencer.h" />
     <ClInclude Include="CSineWave.h" />
     <ClInclude Include="CSynthesizer.h" />

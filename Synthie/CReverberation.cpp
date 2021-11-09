@@ -36,7 +36,7 @@ void CReverberation::Process(double* frameIn, double* frameOut)
 			{
 				test += QSIZE;
 			}
-			if ( x < 100)
+			if ( x < 20)
 			{
 				calcValue += m_samples[test] * pow(m_decay, x);
 				end = false;

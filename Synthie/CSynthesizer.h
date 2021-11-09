@@ -64,8 +64,6 @@ private:
     double m_beat;              //!< The current beat within the measure
 
 
-
-
 };
 
 #pragma comment(lib, "msxml2.lib")

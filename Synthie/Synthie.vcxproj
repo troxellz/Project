@@ -142,6 +142,7 @@
     <ClCompile Include="CSineWave.cpp" />
     <ClCompile Include="CSynthesizer.cpp" />
     <ClCompile Include="CToneInstrument.cpp" />
+    <ClCompile Include="CWaveTableInstrument.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Notes.cpp" />
     <ClCompile Include="Progress.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="CSineWave.h" />
     <ClInclude Include="CSynthesizer.h" />
     <ClInclude Include="CToneInstrument.h" />
+    <ClInclude Include="CWaveTableInstrument.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Notes.h" />
     <ClInclude Include="Progress.h" />

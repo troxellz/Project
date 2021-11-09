@@ -14,6 +14,7 @@ public:
     virtual void SetNote(CNote* note) = 0;
     void SetDuration(double d) { m_duration = d; }
     double GetDuration() { return m_duration; }
+    void LoadSample();
 
 };
 

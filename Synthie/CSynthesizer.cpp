@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CSynthesizer.h"
 #include "CToneInstrument.h"
+#include "CPianoInstrument.h"
 #include "xmlhelp.h"
 #include <string>
 #include <algorithm>
@@ -62,6 +63,11 @@ bool CSynthesizer::Generate(double* frame)
         if (note->Instrument() == L"ToneInstrument")
         {
             instrument = new CToneInstrument();
+        }
+
+        if (note->Instrument() == L"PianoInstrument")
+        {
+            instrument = new CPianoInstrument();
         }
 
         // Configure the instrument object

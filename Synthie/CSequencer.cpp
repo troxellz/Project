@@ -137,6 +137,36 @@ void CSequencer::XmlLoadScore(IXMLDOMNode* xml)
         {
             XmlLoadSynthesizer(node);
         }
+        if (name == L"effect")
+        {
+            XmlLoadEffect(node);
+        }
+    }
+}
+void CSequencer::XmlLoadEffect(IXMLDOMNode* xml)
+{
+
+    CComPtr<IXMLDOMNode> node;
+    xml->get_firstChild(&node);
+    // Get the name of the node
+    CComBSTR name;
+    node->get_nodeName(&name);
+
+    if (name == L"chorus")
+    {
+        m_chorus.XmlLoad(node);
+    }
+    if (name == L"gate")
+    {
+        m_noiseGate.XmlLoad(node);
+    }
+    if (name == L"reverb")
+    {
+        m_reverb.XmlLoad(node);
+    }
+    if (name == L"compressor")
+    {
+        m_compressor.XmlLoad(node);
     }
 }
 
@@ -147,7 +177,23 @@ void CSequencer::XmlLoadSynthesizer(IXMLDOMNode* xml)
     synthesizer->SetNumChannels(m_channels);
     synthesizer->SetSampleRate(m_sampleRate);
     synthesizer->SetBPM(m_bpm);
-    synthesizer->XmlLoadInstrument(xml);
+
+
+    CComPtr<IXMLDOMNode> node;
+    xml->get_firstChild(&node);
+    for (; node != NULL; NextNode(node))
+    {
+        // Get the name of the node
+        CComBSTR name;
+        node->get_nodeName(&name);
+
+        if (name == L"instrument")
+        {
+            synthesizer->XmlLoadInstrument(node);
+        }
+    }
+
+
     m_snthesizers.push_back(synthesizer);
 }
 

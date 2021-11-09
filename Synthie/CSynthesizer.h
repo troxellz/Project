@@ -49,6 +49,12 @@ public:
     void XmlLoadScore(IXMLDOMNode* xml);
     void XmlLoadInstrument(IXMLDOMNode* xml);
     void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument);
+
+
+    
+    //! vector to get wavetable
+   // vector<short> m_wavetable;
+
 private:
     int		m_channels;
     double	m_sampleRate;
@@ -66,6 +72,8 @@ private:
 
 
 
+public:
+   // void LoadSample(string filename);
 };
 
 #pragma comment(lib, "msxml2.lib")

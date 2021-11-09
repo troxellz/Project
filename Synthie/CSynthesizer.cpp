@@ -1,9 +1,11 @@
 #include "pch.h"
 #include "CSynthesizer.h"
 #include "CToneInstrument.h"
+#include "CWaveTableInstrument.h"
 #include "xmlhelp.h"
 #include <string>
 #include <algorithm>
+//#include "DirSoundSource.h"
 
 using namespace std;
 
@@ -64,6 +66,12 @@ bool CSynthesizer::Generate(double* frame)
             instrument = new CToneInstrument();
         }
 
+        if (note->Instrument() == L"WaveTableInstrument")
+        {
+            instrument = new CWaveTableInstrument();
+            //instrument->LoadSample();
+        }
+
         // Configure the instrument object
         if (instrument != NULL)
         {
@@ -110,10 +118,14 @@ bool CSynthesizer::Generate(double* frame)
         // Call the generate function
         if (instrument->Generate())
         {
+         
+           
+
             // If we returned true, we have a valid sample.  Add it 
             // to the frame.
             for (int c = 0; c < GetNumChannels(); c++)
             {
+
                 frame[c] += instrument->Frame(c);
             }
         }
@@ -225,3 +237,23 @@ void CSynthesizer::XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument)
     m_notes.push_back(CNote());
     m_notes.back().XmlLoad(xml, instrument);
 }
+
+/*
+void CSynthesizer::LoadSample(string filename)
+{
+    CDirSoundSource wavin;
+    if (wavin.Open()) {
+        numSampleFrames = wavin.NumSampleFrames();
+
+        m_wavetable.resize(numSampleFrames * m_channels);
+        for (int i = 0; i < numSampleFrames; i++) {
+            short frame[2];
+            wavin.ReadFrame(frame);
+            m_wavetable[i] = frame[0];
+
+        }
+
+    }
+}
+*/
+

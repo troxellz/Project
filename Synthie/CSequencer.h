@@ -64,6 +64,8 @@ private:
 
     void XmlLoadScore(IXMLDOMNode* xml);
     void XmlLoadSynthesizer(IXMLDOMNode* xml);
+    void XmlLoadEffect(IXMLDOMNode* xml);
+
     CNoiseGate m_noiseGate;
 
     CChorusEffect m_chorus;

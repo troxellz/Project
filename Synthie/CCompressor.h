@@ -20,6 +20,10 @@ public:
 	//! Set the amplification and limiting factors
 	void SetFactors(double limiter, double amplifier);
 
+	//!Load
+	void XmlLoad(IXMLDOMNode* xml);
+
+
 private:
 	//!portion of dry sound
 	double m_dry;

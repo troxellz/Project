@@ -177,16 +177,23 @@ void CSequencer::XmlLoadSynthesizer(IXMLDOMNode* xml)
     synthesizer->SetNumChannels(m_channels);
     synthesizer->SetSampleRate(m_sampleRate);
     synthesizer->SetBPM(m_bpm);
-    CComPtr<IXMLDOMNode> node2;
-    xml->get_firstChild(&node2);
-    // Get the name of the node
-    CComBSTR name;
-    node2->get_nodeName(&name);
 
-    if (name == L"instrument")
+
+    CComPtr<IXMLDOMNode> node;
+    xml->get_firstChild(&node);
+    for (; node != NULL; NextNode(node))
     {
-        synthesizer->XmlLoadInstrument(node2);
+        // Get the name of the node
+        CComBSTR name;
+        node->get_nodeName(&name);
+
+        if (name == L"instrument")
+        {
+            synthesizer->XmlLoadInstrument(node);
+        }
     }
+
+
     m_snthesizers.push_back(synthesizer);
 }
 

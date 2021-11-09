@@ -4,10 +4,16 @@
 #include "CNote.h"
 #include "Notes.h"
 #include "CAR.h"
+#include "CNoiseGate.h"
+#include "CChorusEffect.h"
+#include "CCompressor.h"
+#include "CReverberation.h"
 
 CToneInstrument::CToneInstrument(void)
 {
     SetDuration(0.1);
+
+    
 }
 
 void CToneInstrument::Start()
@@ -41,6 +47,19 @@ bool CToneInstrument::Generate()
         m_frame[1] = m_sinewave.Frame(1) * (GetDuration() - m_time) / m_release;
     }
     //end of the attack/release code
+
+    double audio[2];
+    m_chorus.Process(m_frame, audio);
+    m_frame[0] = audio[0];
+    m_frame[1] = audio[1];
+    m_compressor.Process(m_frame, audio);
+    m_frame[0] = audio[0];
+    m_frame[1] = audio[1];
+    m_reverb.Process(m_frame, audio);
+    m_frame[0] = audio[0];
+    m_frame[1] = audio[1];
+    m_noiseGate.Process(m_frame, m_frame);
+
 
     // Update time
     m_time += GetSamplePeriod();

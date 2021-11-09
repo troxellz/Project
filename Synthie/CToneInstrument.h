@@ -4,6 +4,7 @@
 #include "CSineWave.h"
 #include "CAR.h"
 
+
 class CToneInstrument :
     public CInstrument
 {
@@ -21,6 +22,8 @@ public:
 private:
     CSineWave   m_sinewave;
     double m_time;
+
+
 
 };
 

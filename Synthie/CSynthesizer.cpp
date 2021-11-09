@@ -83,8 +83,63 @@ bool CSynthesizer::Generate(double* frame)
             m_instruments.push_back(instrument);
         }
 
+        if (note->Instrument() == L"reverb")
+        {
+            for (list<CInstrument*>::iterator node = m_instruments.begin(); node != m_instruments.end(); )
+            {
+                list<CInstrument*>::iterator next = node;
+                next++;
+                CInstrument* instrument = *node;
+
+                instrument->m_reverb.SetProportions(.5, .5);
+                node = next;
+
+            }
+        }
+        if (note->Instrument() == L"chorus")
+        {
+            for (list<CInstrument*>::iterator node = m_instruments.begin(); node != m_instruments.end(); )
+            {
+                list<CInstrument*>::iterator next = node;
+                next++;
+                CInstrument* instrument = *node;
+
+                instrument->m_chorus.SetProportions(.5, .5);
+                node = next;
+
+            }
+        }
+        if (note->Instrument() == L"compressor")
+        {
+            for (list<CInstrument*>::iterator node = m_instruments.begin(); node != m_instruments.end(); )
+            {
+                list<CInstrument*>::iterator next = node;
+                next++;
+                CInstrument* instrument = *node;
+
+                instrument->m_compressor.SetProportions(.5, .5);
+                node = next;
+
+            }
+        }
+        if (note->Instrument() == L"gate")
+        {
+            for (list<CInstrument*>::iterator node = m_instruments.begin(); node != m_instruments.end(); )
+            {
+                list<CInstrument*>::iterator next = node;
+                next++;
+                CInstrument* instrument = *node;
+
+                instrument->m_noiseGate.SetProportions(.5, .5);
+                node = next;
+
+            }
+        }
+
         m_currentNote++;
     }
+
+
     //
     // Phase 2: Clear all channels to silence 
     //
@@ -228,7 +283,7 @@ void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
         if (name == L"note")
         {
             XmlLoadNote(node, instrument);
-        }
+        } 
     }
 }
 

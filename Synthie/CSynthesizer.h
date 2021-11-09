@@ -70,10 +70,9 @@ private:
     double m_beat;              //!< The current beat within the measure
 
 
-
-
 public:
    // void LoadSample(string filename);
+
 };
 
 #pragma comment(lib, "msxml2.lib")

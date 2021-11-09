@@ -14,6 +14,15 @@ public:
 	//! Sets the portion of wet and dry
 	void SetProportions(double dry, double wet);
 
+	//!Set the number of voices
+	void SetVoices(int voices) { m_voices = voices; }
+
+	//! Set the delay
+	void SetDelay(int delay, int sampleRate);
+
+	//!Load
+	void XmlLoad(IXMLDOMNode* xml);
+
 
 
 private:
@@ -25,6 +34,8 @@ private:
 	int m_rdloc;
 	//! The position in which to write to
 	int m_wrloc;
+	//! number of voices
+	int m_voices;
 
 	//! The previous samples to add the other "voices" from
 	std::vector<double> m_samples;

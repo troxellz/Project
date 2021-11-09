@@ -14,6 +14,9 @@ public:
 	//!Set the threshold
 	void SetThreshold(double threshold);
 
+	//!Load
+	void XmlLoad(IXMLDOMNode* xml);
+
 private:
 	//!portion of dry sound
 	double m_dry;

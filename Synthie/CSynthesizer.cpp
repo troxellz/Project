@@ -177,10 +177,9 @@ void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
 
     // Get a list of all attribute nodes and the
     // length of that list
-    CComPtr<IXMLDOMNode> node;
-    xml->get_firstChild(&node);
+
     CComPtr<IXMLDOMNamedNodeMap> attributes;
-    node->get_attributes(&attributes);
+    xml->get_attributes(&attributes);
     long len;
     attributes->get_length(&len);
 
@@ -206,17 +205,17 @@ void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
     }
 
 
-    CComPtr<IXMLDOMNode> node2;
-    node->get_firstChild(&node2);
-    for (; node2 != NULL; NextNode(node2))
+    CComPtr<IXMLDOMNode> node;
+    xml->get_firstChild(&node);
+    for (; node != NULL; NextNode(node))
     {
         // Get the name of the node
         CComBSTR name;
-        node2->get_nodeName(&name);
+        node->get_nodeName(&name);
 
         if (name == L"note")
         {
-            XmlLoadNote(node2, instrument);
+            XmlLoadNote(node, instrument);
         }
     }
 }

@@ -57,7 +57,17 @@ bool CWaveTableInstrument::Generate()
     m_frame[1] = m_wavetable[pos];
     pos = (pos + 1) % numSampleFrames;
 
-
+    double audio[2];
+    m_chorus.Process(m_frame, audio);
+    m_frame[0] = audio[0];
+    m_frame[1] = audio[1];
+    m_compressor.Process(m_frame, audio);
+    m_frame[0] = audio[0];
+    m_frame[1] = audio[1];
+    m_reverb.Process(m_frame, audio);
+    m_frame[0] = audio[0];
+    m_frame[1] = audio[1];
+    m_noiseGate.Process(m_frame, m_frame);
     
     m_time += GetSamplePeriod();
     // We return true until the time reaches the duration.

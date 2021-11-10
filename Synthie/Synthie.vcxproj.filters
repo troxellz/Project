@@ -90,6 +90,15 @@
     <ClCompile Include="CReverberation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CPianoInstrument.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPianoWave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPianoEnvelope.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio\DirSound.h">
@@ -174,6 +183,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CReverberation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPianoInstrument.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPianoWave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPianoEnvelope.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

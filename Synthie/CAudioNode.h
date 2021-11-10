@@ -22,6 +22,9 @@ public:
     //! Set the bpm
     void SetBPM(double s) { m_bpm = s;}
 
+    //! Get the bpm
+    double GetBPM() { return m_bpm; }
+
 
     //! Access a generated audio frame
     const double* Frame() { return m_frame; }

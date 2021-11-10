@@ -2,6 +2,7 @@
 #include "CSynthesizer.h"
 #include "CToneInstrument.h"
 #include "CWaveTableInstrument.h"
+#include "CPianoInstrument.h"
 #include "xmlhelp.h"
 #include <string>
 #include <algorithm>
@@ -70,6 +71,9 @@ bool CSynthesizer::Generate(double* frame)
         {
             instrument = new CWaveTableInstrument();
             //instrument->LoadSample();
+        if (note->Instrument() == L"PianoInstrument")
+        {
+            instrument = new CPianoInstrument();
         }
 
         // Configure the instrument object

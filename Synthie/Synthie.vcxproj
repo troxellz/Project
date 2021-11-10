@@ -137,6 +137,9 @@
     <ClCompile Include="CInstrument.cpp" />
     <ClCompile Include="CNoiseGate.cpp" />
     <ClCompile Include="CNote.cpp" />
+    <ClCompile Include="CPianoEnvelope.cpp" />
+    <ClCompile Include="CPianoInstrument.cpp" />
+    <ClCompile Include="CPianoWave.cpp" />
     <ClCompile Include="CReverberation.cpp" />
     <ClCompile Include="CSequencer.cpp" />
     <ClCompile Include="CSineWave.cpp" />
@@ -168,6 +171,9 @@
     <ClInclude Include="CInstrument.h" />
     <ClInclude Include="CNoiseGate.h" />
     <ClInclude Include="CNote.h" />
+    <ClInclude Include="CPianoEnvelope.h" />
+    <ClInclude Include="CPianoInstrument.h" />
+    <ClInclude Include="CPianoWave.h" />
     <ClInclude Include="CReverberation.h" />
     <ClInclude Include="CSequencer.h" />
     <ClInclude Include="CSineWave.h" />

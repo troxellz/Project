@@ -35,7 +35,7 @@ void CChorusEffect::Process(double* frameIn, double* frameOut)
 			}
 			if (m_samples[test] < frameIn[c] + 100 && m_samples[test] > frameIn[c] - 100)
 			{
-				calcValue += m_samples[test] + m_wave.Generate() * .001;
+				calcValue += m_samples[test] + m_wave.Generate() * .01;
 				sampledTimes++;
 			}
 		}

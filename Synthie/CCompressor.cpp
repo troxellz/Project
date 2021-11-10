@@ -7,8 +7,8 @@ CCompressor::CCompressor()
 {
 	m_dry = 1;
 	m_wet = 0;
-	m_low = .1;
-	m_high = .25;
+	m_low = .01;
+	m_high = .05;
 	m_amplificationFactor = 2;
 	m_limitFactor = 2;
 }

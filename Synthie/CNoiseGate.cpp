@@ -5,7 +5,7 @@ CNoiseGate::CNoiseGate()
 {
 	m_dry = 1;
 	m_wet = 0;
-	m_threshold = .0015;
+	m_threshold = .005;
 }
 
 void CNoiseGate::Process(double *frameIn, double *frameOut)

@@ -83,7 +83,8 @@ bool CSynthesizer::Generate(double* frame)
                 next++;
                 CInstrument* instrument = *node;
 
-                instrument->m_reverb.SetProportions(.5, .5);
+                instrument->m_reverb.SetProportions(0, 1);
+                instrument->m_duration = instrument->m_duration + .025 * 20;
                 node = next;
 
             }
@@ -96,7 +97,7 @@ bool CSynthesizer::Generate(double* frame)
                 next++;
                 CInstrument* instrument = *node;
 
-                instrument->m_chorus.SetProportions(.5, .5);
+                instrument->m_chorus.SetProportions(0, 1);
                 node = next;
 
             }
@@ -273,6 +274,23 @@ void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
             XmlLoadNote(node, instrument);
         } 
     }
+    std::sort(std::begin(m_notes), std::end(m_notes),
+        [](CNote const& a, CNote const& b) -> bool
+        { 
+            if (a.Measure() < b.Measure())
+            {
+                return true;
+            }
+            if (a.Measure() == b.Measure())
+            {
+                if (a.Beat() < b.Beat())
+                {
+                    return true;
+                }
+            }
+            return false;
+        });
+    
 }
 
 void CSynthesizer::XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument)

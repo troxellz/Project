@@ -48,6 +48,7 @@ bool CToneInstrument::Generate()
     }
     //end of the attack/release code
 
+    
     double audio[2];
     m_chorus.Process(m_frame, audio);
     m_frame[0] = audio[0];
@@ -59,7 +60,7 @@ bool CToneInstrument::Generate()
     m_frame[0] = audio[0];
     m_frame[1] = audio[1];
     m_noiseGate.Process(m_frame, m_frame);
-
+    
 
     // Update time
     m_time += GetSamplePeriod();

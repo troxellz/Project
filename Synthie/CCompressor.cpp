@@ -8,9 +8,9 @@ CCompressor::CCompressor()
 	m_dry = 1;
 	m_wet = 0;
 	m_low = .01;
-	m_high = .05;
-	m_amplificationFactor = 2;
-	m_limitFactor = 2;
+	m_high = .25;
+	m_amplificationFactor = 1.5;
+	m_limitFactor = 1.5;
 }
 
 void CCompressor::Process(double* frameIn, double* frameOut)

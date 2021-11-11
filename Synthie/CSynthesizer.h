@@ -49,6 +49,12 @@ public:
     void XmlLoadScore(IXMLDOMNode* xml);
     void XmlLoadInstrument(IXMLDOMNode* xml);
     void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument);
+
+
+    
+    //! vector to get wavetable
+   // vector<short> m_wavetable;
+
 private:
     int		m_channels;
     double	m_sampleRate;
@@ -63,6 +69,9 @@ private:
     int m_measure;              //!< The current measure
     double m_beat;              //!< The current beat within the measure
 
+
+public:
+   // void LoadSample(string filename);
 
 };
 

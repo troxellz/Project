@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<score bpm="60" beatspermeasure="4">
+	<effect effect="Reverb">
+		<reverb dry=".5" delay="200" decay="0.7"/>
+	</effect>
+	<synthesizer synthesizer="CSynthesizer">
+    		 <instrument instrument="ToneInstrument">
+         		<note measure="1" beat="1" duration="2" note="F4"/>
+     		</instrument>
+	</synthesizer>
+</score>

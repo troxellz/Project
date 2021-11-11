@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<score bpm="120" beatspermeasure="2">
+	<synthesizer synthesizer="CSynthesizer">
+    		 <instrument instrument="ToneInstrument">
+         		<note measure="1" beat="1" duration="1" note="F4"/>
+         		<note measure="2" beat="1" duration="1" note="F4"/>
+          		<note measure="3" beat="1" duration="1" note="F4"/>
+			<note measure="4" beat="1" duration="1" note="F4"/>
+         		<note measure="5" beat="1" duration="1" note="F4"/>
+     		</instrument>
+		<instrument instrument="chorus">
+			<note measure="2" beat="1" duration="1" note="F4"/>
+		</instrument>
+		<instrument instrument="reverb">
+			<note measure="3" beat="1" duration="1" note="F4"/>
+		</instrument>
+		<instrument instrument="compressor">
+			<note measure="4" beat="1" duration="1" note="F4"/>
+		</instrument>
+		<instrument instrument="gate">
+			<note measure="5" beat="1" duration="1" note="F4"/>
+		</instrument>
+	</synthesizer>
+</score>

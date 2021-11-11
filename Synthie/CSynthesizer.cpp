@@ -65,6 +65,12 @@ bool CSynthesizer::Generate(double* frame)
             instrument = new CToneInstrument();
         }
 
+
+        if (note->Instrument() == L"WaveTableInstrument")
+        {
+            instrument = new CWaveTableInstrument();
+            //instrument->LoadSample();
+        }
         if (note->Instrument() == L"PianoInstrument")
         {
             instrument = new CPianoInstrument();
@@ -89,7 +95,8 @@ bool CSynthesizer::Generate(double* frame)
                 next++;
                 CInstrument* instrument = *node;
 
-                instrument->m_reverb.SetProportions(.5, .5);
+                instrument->m_reverb.SetProportions(0, 1);
+                instrument->m_duration = instrument->m_duration + .025 * 20;
                 node = next;
 
             }
@@ -102,11 +109,12 @@ bool CSynthesizer::Generate(double* frame)
                 next++;
                 CInstrument* instrument = *node;
 
-                instrument->m_chorus.SetProportions(.5, .5);
+                instrument->m_chorus.SetProportions(0, 1);
                 node = next;
 
             }
         }
+
         if (note->Instrument() == L"compressor")
         {
             for (list<CInstrument*>::iterator node = m_instruments.begin(); node != m_instruments.end(); )
@@ -219,7 +227,7 @@ bool CSynthesizer::Generate(double* frame)
     return !m_instruments.empty() || m_currentNote < (int)m_notes.size();
 }
 
-void CSynthesizer::Clear(void)
+void CSynthesizer::Clear()
 {
     m_instruments.clear();
     m_notes.clear();
@@ -279,6 +287,23 @@ void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
             XmlLoadNote(node, instrument);
         } 
     }
+    std::sort(std::begin(m_notes), std::end(m_notes),
+        [](CNote const& a, CNote const& b) -> bool
+        { 
+            if (a.Measure() < b.Measure())
+            {
+                return true;
+            }
+            if (a.Measure() == b.Measure())
+            {
+                if (a.Beat() < b.Beat())
+                {
+                    return true;
+                }
+            }
+            return false;
+        });
+    
 }
 
 void CSynthesizer::XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument)

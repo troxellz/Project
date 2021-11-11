@@ -206,18 +206,11 @@ void CSequencer::Clear(void)
 
 bool CSequencer::Generate(double* frame)
 {
-    // No one ended up adding a "synthesizer" and they are all instruments. The fact this is not set up quite right is okay.
-    bool keepGoing = true;
     for (list<CSynthesizer*>::iterator node = m_snthesizers.begin(); node != m_snthesizers.end(); )
     {
-        if (!(*node)->Generate(frame))
-        {
-            keepGoing = false;
-        }
-
+        (*node)->Generate(frame);
         node++;
     }
-    // These are the overall effects, not the ones for individual instruments.
     double audio[2];
     m_chorus.Process(frame, audio);
     frame[0] = audio[0];
@@ -229,5 +222,5 @@ bool CSequencer::Generate(double* frame)
     frame[0] = audio[0];
     frame[1] = audio[1];
     m_noiseGate.Process(frame, frame);
-    return keepGoing;
+    return true;
 }

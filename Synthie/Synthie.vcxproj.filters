@@ -90,7 +90,6 @@
     <ClCompile Include="CReverberation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CWaveTableInstrument.cpp">
     <ClCompile Include="CPianoInstrument.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -186,7 +185,6 @@
     <ClInclude Include="CReverberation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CWaveTableInstrument.h">
     <ClInclude Include="CPianoInstrument.h">
       <Filter>Header Files</Filter>
     </ClInclude>

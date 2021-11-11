@@ -55,8 +55,5 @@
           		<note measure="8" beat="1" duration="3" note="F4"/>
           		<note measure="8" beat="1" duration="3" note="D4"/>
      		</instrument>
-		<instrument instrument="reverb">
-			<note measure="8" beat="1" duration="3" note="D4"/>
-		</instrument>
 	</synthesizer>
 </score>

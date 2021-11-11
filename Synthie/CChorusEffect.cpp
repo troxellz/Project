@@ -42,6 +42,7 @@ void CChorusEffect::Process(double* frameIn, double* frameOut)
 					calcValue += m_samples[test] + m_wave.Generate() * .01;
 					sampledTimes++;
 				}
+
 			}
 			calcValue = calcValue / sampledTimes;
 			frameOut[c] = m_dry * frameIn[c] + m_wet * calcValue;

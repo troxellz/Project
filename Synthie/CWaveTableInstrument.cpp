@@ -15,7 +15,8 @@ CWaveTableInstrument::CWaveTableInstrument(void)
     m_time = 0;
     numChannels = 2;
     pos = 0;
-    LoadSample(L"filename");
+    LoadSample("arms.wav");
+    vector<short> m_wavetable;
 }
 
 
@@ -27,24 +28,31 @@ void CWaveTableInstrument::Start()
 
 }
 
-void CWaveTableInstrument::LoadSample(const wchar_t *filename)
+void CWaveTableInstrument::LoadSample(const char* filename)
 {
-    CDirSoundSource wavin;
-    if (wavin.Open(filename)) {
+         CDirSoundSource wavin;
+         if (!wavin.Open(filename)) {
+             return;
+         }
+        
         numChannels = wavin.NumChannels();
         sampleRate = wavin.SampleRate();
         numSampleFrames = wavin.NumSampleFrames();
-
+        
         m_wavetable.resize(numSampleFrames * numChannels);
+       
+        int ndx = 0;
         for (int i = 0; i < numSampleFrames; i++) {
             short frame[2];
             wavin.ReadFrame(frame);
-            m_wavetable[i] = frame[0];
-
-        }
-
+            for (int c = 0; c < numChannels; c++) {
+                m_wavetable[ndx++] = frame[c];
+            }
+// }
     }
+
 }
+
 
 
 bool CWaveTableInstrument::Generate()
@@ -68,12 +76,13 @@ bool CWaveTableInstrument::Generate()
     m_frame[0] = audio[0];
     m_frame[1] = audio[1];
     m_noiseGate.Process(m_frame, m_frame);
-    
+
     m_time += GetSamplePeriod();
     // We return true until the time reaches the duration.
     return m_time < GetDuration();
-    
+
 }
+
 
 void CWaveTableInstrument::SetNote(CNote* note)
 {

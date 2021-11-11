@@ -201,6 +201,10 @@ void CSequencer::XmlLoadSynthesizer(IXMLDOMNode* xml)
 void CSequencer::Clear(void)
 {
     m_snthesizers.clear();
+    m_chorus = CChorusEffect();
+    m_reverb = CReverberation();
+    m_compressor = CCompressor();
+    m_noiseGate = CNoiseGate();
     
 }
 

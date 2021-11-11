@@ -10,15 +10,18 @@ CNoiseGate::CNoiseGate()
 
 void CNoiseGate::Process(double *frameIn, double *frameOut)
 {
-	for (int c = 0; c < 2; c++)
+	if (m_wet > .0001) 
 	{
-		double calcValue = 0;
-
-		if (abs(frameIn[c]) > m_threshold)
+		for (int c = 0; c < 2; c++)
 		{
-			calcValue = frameIn[c];
+			double calcValue = 0;
+
+			if (abs(frameIn[c]) > m_threshold)
+			{
+				calcValue = frameIn[c];
+			}
+			frameOut[c] = m_dry * frameIn[c] + m_wet * calcValue;
 		}
-		frameOut[c] = m_dry * frameIn[c] + m_wet * calcValue;
 	}
 }
 

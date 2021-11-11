@@ -7,44 +7,49 @@ CCompressor::CCompressor()
 {
 	m_dry = 1;
 	m_wet = 0;
-	m_low = .1;
+	m_low = .01;
 	m_high = .25;
-	m_amplificationFactor = 2;
-	m_limitFactor = 2;
+	m_amplificationFactor = 1.5;
+	m_limitFactor = 1.5;
 }
 
 void CCompressor::Process(double* frameIn, double* frameOut)
 {
+	frameOut[0] = frameIn[0];
+	frameOut[1] = frameIn[1];
 
-	for (int c = 0; c < 2; c++)
+	if (m_wet > .00001)
 	{
-		double calcValue = frameIn[c];
-
-		if (abs(frameIn[c]) < m_low)
+		for (int c = 0; c < 2; c++)
 		{
-			calcValue = frameIn[c] * m_amplificationFactor;
-			if (calcValue > m_low)
-			{
-				calcValue = m_low;
-			}
-			if (calcValue < -m_low)
-			{
-				calcValue = -m_low;
-			}
-		}
-		if (abs(frameIn[c]) > m_high)
-		{
-			if (frameIn[c] > 0)
-			{
-				calcValue = (frameIn[c] - m_high) / m_limitFactor + m_high;
+			double calcValue = frameIn[c];
 
-			}
-			else
+			if (abs(frameIn[c]) < m_low)
 			{
-				calcValue = -(m_high + frameIn[c]) / m_limitFactor - m_high;
+				calcValue = frameIn[c] * m_amplificationFactor;
+				if (calcValue > m_low)
+				{
+					calcValue = m_low;
+				}
+				if (calcValue < -m_low)
+				{
+					calcValue = -m_low;
+				}
 			}
+			if (abs(frameIn[c]) > m_high)
+			{
+				if (frameIn[c] > 0)
+				{
+					calcValue = (frameIn[c] - m_high) / m_limitFactor + m_high;
+
+				}
+				else
+				{
+					calcValue = -(m_high + frameIn[c]) / m_limitFactor - m_high;
+				}
+			}
+			frameOut[c] = m_dry * frameIn[c] + m_wet * calcValue;
 		}
-		frameOut[c] = m_dry * frameIn[c] + m_wet * calcValue;
 	}
 
 }

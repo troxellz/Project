@@ -7,12 +7,12 @@ CReverberation::CReverberation()
 {
 	m_dry = 1;
 	m_wet = 0;
-	m_delay = 1103;
-	m_wrloc = 0;
+	m_delay = 551;
+	m_wrloc = 2;
 	m_rdloc = 0;
 	m_samples.resize(m_delay * 100);
 	std::fill(m_samples.begin(), m_samples.end(), 0);
-	m_decay = .9;
+	m_decay = .7;
 }
 
 void CReverberation::Process(double* frameIn, double* frameOut)
@@ -21,37 +21,37 @@ void CReverberation::Process(double* frameIn, double* frameOut)
 	// Will will fade out for any reasonable decay
 	int QSIZE = m_delay * 100 - 1;
 
-	for (int c = 0; c < 2; c++)
-	{
-		double calcValue = 0;
-		bool end = false;
-		int x = 0;
-		int y = 0;
-		double divisor = 0;
-		while (!end)
-		{
-			end = true;
-			int test = (m_rdloc - (x) * m_delay + c) % QSIZE;
-			if (test < 0)
-			{
-				test += QSIZE;
-			}
-			if ( x < 20)
-			{
-				calcValue += m_samples[test] * pow(m_decay, x);
-				end = false;
-				divisor += double(pow(m_decay, x));
-			}
+	frameOut[0] = frameIn[0];
+	frameOut[1] = frameIn[1];
 
-			if (x % 2 == 0)
+	if (m_wet > .00001)
+	{
+		for (int c = 0; c < 2; c++)
+		{
+			double calcValue = 0;
+			bool end = false;
+			double divisor = 0;
+			for (int x = 0; x < 7; x++)
 			{
-				y++;
+				for (int y = 0; y < 7; y++)
+				{
+
+					end = true;
+					int test = (m_rdloc - (y + x) * m_delay + c) % QSIZE;
+					if (test < 0)
+					{
+						test += QSIZE;
+					}
+
+					calcValue += m_samples[test] * pow(m_decay, x + y);
+					divisor += double(pow(m_decay, x + y));
+
+				}
 			}
-			x++;
+			calcValue = calcValue / (divisor - 1);
+			frameOut[c] = m_dry * frameIn[c] + m_wet * calcValue;
 
 		}
-		calcValue = calcValue / (divisor-1);
-		frameOut[c] = m_dry * frameIn[c] + m_wet * calcValue;
 	}
 	m_samples[m_wrloc] = frameIn[0];
 	m_samples[m_wrloc + 1] = frameIn[1];
@@ -69,6 +69,10 @@ void CReverberation::SetProportions(double dry, double wet)
 void CReverberation::SetDelay(int delay, int sampleRate)
 {
 	m_delay = delay * sampleRate / 1000;
+	m_samples.resize(m_delay * 100);
+	m_wrloc = 2;
+	m_rdloc = 0;
+
 }
 
 void CReverberation::SetDecay(double decay)

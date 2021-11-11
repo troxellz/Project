@@ -71,6 +71,7 @@ bool CSynthesizer::Generate(double* frame)
         {
             instrument = new CWaveTableInstrument();
             //instrument->LoadSample();
+        }
         if (note->Instrument() == L"PianoInstrument")
         {
             instrument = new CPianoInstrument();
@@ -113,6 +114,7 @@ bool CSynthesizer::Generate(double* frame)
 
             }
         }
+
         if (note->Instrument() == L"compressor")
         {
             for (list<CInstrument*>::iterator node = m_instruments.begin(); node != m_instruments.end(); )
@@ -229,7 +231,7 @@ bool CSynthesizer::Generate(double* frame)
     return !m_instruments.empty() || m_currentNote < (int)m_notes.size();
 }
 
-void CSynthesizer::Clear(void)
+void CSynthesizer::Clear()
 {
     m_instruments.clear();
     m_notes.clear();

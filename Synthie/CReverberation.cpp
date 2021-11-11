@@ -50,12 +50,6 @@ void CReverberation::Process(double* frameIn, double* frameOut)
 			}
 			calcValue = calcValue / (divisor - 1);
 			frameOut[c] = m_dry * frameIn[c] + m_wet * calcValue;
-
-
-				calcValue += m_samples[test] * pow(m_decay, x + y);
-				divisor += double(pow(m_decay, x + y));
-
-			}
 		}
 	}
 	m_samples[m_wrloc] = frameIn[0];

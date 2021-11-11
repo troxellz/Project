@@ -21,31 +21,36 @@ void CReverberation::Process(double* frameIn, double* frameOut)
 	// Will will fade out for any reasonable decay
 	int QSIZE = m_delay * 100 - 1;
 
-	for (int c = 0; c < 2; c++)
+	frameOut[0] = frameIn[0];
+	frameOut[1] = frameIn[1];
+
+	if (m_wet > .00001)
 	{
-		double calcValue = 0;
-		bool end = false;
-		double divisor = 0;
-		for (int x = 0; x < 7; x++)
+		for (int c = 0; c < 2; c++)
 		{
-			for (int y = 0; y < 7; y++)
+			double calcValue = 0;
+			bool end = false;
+			double divisor = 0;
+			for (int x = 0; x < 7; x++)
 			{
-
-				end = true;
-				int test = (m_rdloc - (y + x) * m_delay + c) % QSIZE;
-				if (test < 0)
+				for (int y = 0; y < 7; y++)
 				{
-					test += QSIZE;
+
+					end = true;
+					int test = (m_rdloc - (y + x) * m_delay + c) % QSIZE;
+					if (test < 0)
+					{
+						test += QSIZE;
+					}
+
+					calcValue += m_samples[test] * pow(m_decay, x + y);
+					divisor += double(pow(m_decay, x + y));
+
 				}
-
-				calcValue += m_samples[test] * pow(m_decay, x + y);
-				divisor += double(pow(m_decay, x + y));
-
 			}
+			calcValue = calcValue / (divisor - 1);
+			frameOut[c] = m_dry * frameIn[c] + m_wet * calcValue;
 		}
-		calcValue = calcValue / (divisor-1);
-		frameOut[c] = m_dry * frameIn[c] + m_wet * calcValue;
-		
 	}
 	m_samples[m_wrloc] = frameIn[0];
 	m_samples[m_wrloc + 1] = frameIn[1];

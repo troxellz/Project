@@ -21,26 +21,32 @@ CChorusEffect::CChorusEffect()
 void CChorusEffect::Process(double* frameIn, double* frameOut)
 {
 	int QSIZE = m_delay * m_voices - 1;
+	frameOut[0] = frameIn[0];
+	frameOut[1] = frameIn[1];
 
-	for (int c = 0; c < 2; c++)
+	if (m_wet > .00001)
 	{
-		double calcValue = 0;
-		int sampledTimes = 0;
-		for (int x = 0; x < m_voices; x++)
+		for (int c = 0; c < 2; c++)
 		{
-			int test = (m_rdloc - x * m_delay + c) % QSIZE;
-			if (test < 0)
+			double calcValue = 0;
+			int sampledTimes = 0;
+			for (int x = 0; x < m_voices; x++)
 			{
-				test += QSIZE;
+				int test = (m_rdloc - x * m_delay + c) % QSIZE;
+				if (test < 0)
+				{
+					test += QSIZE;
+				}
+				if (m_samples[test] < frameIn[c] + 100 && m_samples[test] > frameIn[c] - 100)
+				{
+					calcValue += m_samples[test] + m_wave.Generate() * .01;
+					sampledTimes++;
+				}
+
 			}
-			if (m_samples[test] < frameIn[c] + 100 && m_samples[test] > frameIn[c] - 100)
-			{
-				calcValue += m_samples[test] + m_wave.Generate() * .01;
-				sampledTimes++;
-			}
+			calcValue = calcValue / sampledTimes;
+			frameOut[c] = m_dry * frameIn[c] + m_wet * calcValue;
 		}
-		calcValue = calcValue / sampledTimes;
-		frameOut[c] = m_dry * frameIn[c] + m_wet * calcValue;
 	}
 	m_samples[m_wrloc] = frameIn[0];
 	m_samples[m_wrloc + 1] = frameIn[1];

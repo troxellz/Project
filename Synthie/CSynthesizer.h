@@ -38,7 +38,7 @@ public:
     //! Generate one audio frame
     bool Generate(double* frame);
 
-    void Clear(void);
+    void Clear();
 
     void OpenScore(CString& filename);
    

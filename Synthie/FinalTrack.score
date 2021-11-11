@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <score bpm="120" beatspermeasure="2">
 	<effect effect="Chorus">
-		<chorus dry="0.5" delay="50" voices="5"/>
+		<chorus dry="0.75" delay="50" voices="5"/>
 	</effect>
 	<effect effect="Gate">
-		<gate dry="0.5" threshold="0.0015"/>
+		<gate dry="0.75" threshold="0.0015"/>
 	</effect>
 	<effect effect="Reverb">
-		<reverb dry="0.5" delay="25" decay="0.7"/>
+		<reverb dry="0.75" delay="25" decay="0.7"/>
 	</effect>
 	<effect effect="Compressor">
-		<compressor dry="0.5" low="0.1" high="0.25" amplification="2" limiting="3"/>
+		<compressor dry="0.75" low="0.1" high="0.25" amplification="2" limiting="3"/>
 	</effect>
 
 	<synthesizer synthesizer="CSynthesizer">
@@ -334,7 +334,7 @@
 			<note measure="62" beat="3" duration="1" note="C4" pedal="down"/>
 
 		</instrument>
-		
+
 		
 		
 		<instrument instrument="gate">
@@ -363,31 +363,7 @@
 			<note measure="4" beat="4" duration="1" note="F4"/>
 		</instrument>
 
-		<instrument instrument="reverb">
-			<note measure="6" beat="1" duration="1" note="F4"/>
-		</instrument>
-		<instrument instrument="reverb">
-			<note measure="6" beat="2" duration="1" note="F4"/>
-		</instrument>
-		<instrument instrument="reverb">
-			<note measure="6" beat="3" duration="1" note="F4"/>
-		</instrument>
-		<instrument instrument="reverb">
-			<note measure="6" beat="4" duration="1" note="F4"/>
-		</instrument>
-
-		<instrument instrument="chorus">
-			<note measure="9" beat="1" duration="1" note="F4"/>
-		</instrument>
-		<instrument instrument="chorus">
-			<note measure="9" beat="2" duration="1" note="F4"/>
-		</instrument>
-		<instrument instrument="chorus">
-			<note measure="9" beat="3" duration="1" note="F4"/>
-		</instrument>
-		<instrument instrument="chorus">
-			<note measure="9" beat="4" duration="1" note="F4"/>
-		</instrument>
+		
 
   
     </synthesizer>

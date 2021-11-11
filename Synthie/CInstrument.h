@@ -23,7 +23,6 @@ public:
     virtual void SetNote(CNote* note) = 0;
     void SetDuration(double d) { m_duration = d; }
     double GetDuration() { return m_duration; }
-    void LoadSample();
     double Send(int i) { return sends[i]; }
     void SetSends(int i, double val) { sends[i] = val; }
 
